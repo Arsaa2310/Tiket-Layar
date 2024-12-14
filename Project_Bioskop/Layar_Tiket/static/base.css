@@ -1,0 +1,203 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #110505;
+    color: #f0f0f0;
+}
+
+/* Header and Navbar */
+.logo-home{
+    height: 80px;
+    width: 80px;
+}
+
+
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .btn {
+    color: #e50914 !important; /* Mengubah warna teks jadi putih */
+}
+
+.film{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.navbar .form-control {
+    background-color: #ffffff33; /* Mengubah warna latar belakang input search agar tetap terlihat */
+    color: white;
+    border-color: #e50914;
+}
+
+.navbar .form-control::placeholder {
+    color: #dedede99; /* Mengubah warna placeholder input search */
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 75vh; /* Mengisi tinggi viewport */
+    object-fit: cover; /* Menjaga proporsi gambar */
+}
+
+.navbar .dropdown .rounded-circle {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+}
+
+.container-fluid {
+    display: flex;
+    justify-content: center; /* Form di tengah horizontal */
+    align-items: center; /* Semua elemen di tengah vertical */
+}
+
+form.d-flex {
+    width: 50%; /* Mengatur lebar form agar pas di navbar */
+    max-width: 400px; /* Opsi tambahan untuk kontrol ukuran */
+}
+
+
+
+
+/* Hero Section */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Sesuaikan tinggi sesuai kebutuhan */
+    overflow: hidden;
+}
+
+.hero img.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero iframe.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: none; /* Tersembunyi saat pertama kali dimuat */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.play-button {
+    font-size: 50px;
+    color: #fcfcfc;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* Categories */
+.categories {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    gap: 10px;
+}
+
+.categories button {
+    background-color: #ffffff;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Movies Section */
+.movies-section, .trending-section {
+    padding: 20px 30px;
+}
+
+.movies-section h2, .trending-section h2 {
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.movie-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.movie-card {
+    background-color: #333;
+    border-radius: 5px;
+    width: 200px;
+    margin: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgb(222, 1, 1);
+    text-align: center;
+}
+
+.movie-card img {
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+}
+
+.movie-title {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.rating {
+    background-color: #e50914;
+    padding: 5px;
+    border-radius: 3px;
+    color: #000;
+    display: inline-block;
+    margin: 10px 0 15px;
+    font-size: 14px;
+}
+
+/* Trending Section */
+.trending-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.trending-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.trending-card img {
+    width: 50px;
+    height: 75px;
+    object-fit: cover;
+}
+
+.trending-title {
+    flex-grow: 1;
+}

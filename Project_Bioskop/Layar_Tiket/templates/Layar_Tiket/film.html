@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie.Judul }}</title>
+    <link rel="stylesheet" href="{% static 'film.css' %}">
+</head>
+<body>
+    <div class="container" style="background-image: url('{{ movie.Poster }}');"></div>
+        <div class="overlay">
+        <div class="navbar">
+            <a href="..\"><img src="{% static 'Logo.png' %}" ></a>
+        </div>
+        <div class="content">
+            <img class="movie-poster" src="{{ movie.Poster }}" alt="{{ movie.Judul }} Poster">
+            <div class="details">
+                <h1>{{ movie.Judul }}</h1>
+                <div class="rating">
+                    <span>{{ movie.Rating }}</span>
+                </div>
+                <p><strong>Genre:</strong> {{ movie.Genre }}</p>
+                <p><strong>Durasi:</strong> {{ movie.Durasi }}</p>
+                <p><strong>Rating:</strong> {{ movie.Rating }}</p>
+                <p>{{ movie.Sinopsis }}</p>
+                <button>Pesan</button>
+                <button>Jam Tayang</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
