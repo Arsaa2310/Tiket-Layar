@@ -28,8 +28,8 @@
                         <img src="{% static 'Logo.svg' %}" alt="Profile" class="rounded-circle" width="40" height="40">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                        <li><a class="dropdown-item" href="#">Profil</a></li>
-                        <li><a class="dropdown-item" href="#">History</a></li>
+                        <li><a class="dropdown-item" href=".\Profil">Profil</a></li>
+                        <li><a class="dropdown-item" href=".\Profil">History</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="..\login">Logout</a></li>
                     </ul>
@@ -75,7 +75,7 @@
                 {% for Film in data %}
                     
                       <div class="movie-card">
-                        <a class='film' href=" ./{{ Film.Judul}} ">
+                        <a class='film' href=" .\{{ Film.Judul}} ">
                           <img src=" {{ Film.Poster }} " alt=" {{ Film.Judul }} ">
                           <div class="movie-title">{{ Film.Judul }}</div>
                           <div class="rating">{{ Film.Rating }}</div>

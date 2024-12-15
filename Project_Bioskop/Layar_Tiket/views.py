@@ -14,11 +14,11 @@ def login_view(request):
             password = form.cleaned_data['password']
             try:
                 user = Pelanggan.objects.get(email=email)
-                id_user = user.id_pelanggan
+                id_pelanggan = user.id_pelanggan
                 user = authenticate(request, username=user.username, password=password)
                 if user is not None:
                     login(request, user)
-                    return redirect('base',id = id_user)
+                    return redirect('base',id = id_pelanggan)
                 else:
                     form.add_error(None, "Invalid email or password")
             except Pelanggan.DoesNotExist:
@@ -39,7 +39,7 @@ def signup_view(request):
 
     return render(request, 'Layar_Tiket/signup.html', {'form': form})
 
-def base(request, id):
+def base(request, id_pelanggan):
     import re
     import requests
     from bs4 import BeautifulSoup
@@ -101,8 +101,8 @@ def base(request, id):
 
         sinopsis_cls = []
         for i in sinopsis:
-            sin = re.sub(r'\n','<br>',i)
-            sin = re.sub(r'\r','',sin)
+            #sin = re.sub(r'\n','<br>',i)
+            sin = re.sub(r'\r','',i)
             sinopsis_cls.append(sin)
 
         return sinopsis_cls, durasi, genre
@@ -139,15 +139,28 @@ def base(request, id):
     
     return render(request, 'Layar_Tiket/base.html', {'data': data_film})
 
+def profil(request, id_pelanggan): 
+    try:
+        data_user = Pelanggan.objects.get(id_pelanggan=id_pelanggan)  
+    except Film.DoesNotExist:
+        data_user = None
+    if data_user :
+        data_user_data = {
+        'Email': data_user.email,
+        'Nama': data_user.nm_pelanggan,
+        'ID' : data_user.id_pelanggan,
+        }
+    else:
+        data_user_data = None
+    return render(request, 'Layar_Tiket/profil.html', {'data': data_user_data})
 
-def film(request, judul, id):
+def film(request, judul, id_pelanggan):
     # Memfilter film berdasarkan judul
     try:
-        data_film = Film.objects.get(judul=judul)
+        data_film = Film.objects.filter(judul=judul).first()
     except Film.DoesNotExist:
         data_film = None
     
-    # Jika film ditemukan, tampilkan detailnya, jika tidak tampilkan error atau pesan lainnya
     if data_film:
         data_film_data = {
             "Judul": data_film.judul,
@@ -155,7 +168,7 @@ def film(request, judul, id):
             "Durasi": data_film.durasi,
             "Rating": data_film.rating,
             "Genre": data_film.genre,
-            "Sinopsis": data_film.sinopsis,  # Bisa ditambahkan atribut lainnya sesuai model
+            "Sinopsis": data_film.sinopsis, 
         }
     else:
         data_film_data = None
