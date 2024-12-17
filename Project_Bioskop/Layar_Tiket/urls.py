@@ -8,4 +8,6 @@ urlpatterns = [
     path('home/<str:id_pelanggan>/', views.base, name='base'),
     path('home/<str:id_pelanggan>/Profil/', views.profil, name='profil'),
     path('home/<str:id_pelanggan>/<str:judul>/', views.film, name='film'),
+    path('home/<str:id_pelanggan>/<str:judul>/pesan', views.pesan_tiket, name='pesan'),
+
 ]

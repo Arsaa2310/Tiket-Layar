@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignUpForm
-from .models import Pelanggan, Film
+from .models import Pelanggan, Film, Bioskop, Teater, Tiket, Kursi
 
 def home(request):
     return render(request, 'Layar_Tiket/home.html')
@@ -18,7 +18,7 @@ def login_view(request):
                 user = authenticate(request, username=user.username, password=password)
                 if user is not None:
                     login(request, user)
-                    return redirect('base',id = id_pelanggan)
+                    return redirect('base',id_pelanggan = id_pelanggan)
                 else:
                     form.add_error(None, "Invalid email or password")
             except Pelanggan.DoesNotExist:
@@ -174,3 +174,35 @@ def film(request, judul, id_pelanggan):
         data_film_data = None
 
     return render(request, 'Layar_Tiket/film.html', {'movie': data_film_data})
+
+def pesan_tiket(request, judul, id_pelanggan):
+    try:
+        data_film = Film.objects.filter(judul=judul).first()
+        data_bioskop = Bioskop.objects.get(id_film = data_film.id_film)
+        data_teater = Teater.objects.get()
+    except Film.DoesNotExist:
+        data_film = None
+
+    if data_film and data_bioskop:
+        data_film_data = {
+            "Judul": data_film.judul,
+            "Poster": data_film.link_poster,
+            "Durasi": data_film.durasi,
+            "Rating": data_film.rating,
+            "Genre": data_film.genre,
+            "Sinopsis": data_film.sinopsis, 
+        }
+        data_bioskop_data = {
+            'Nama_Bioksop': data_bioskop.nm_bioskop,
+            'Alamat_Bioskop': data_bioskop.alamat,
+        }
+        
+    else:
+        data_film_data = None
+    print(data_bioskop)
+    return render(request, 'Layar_Tiket/pesan.html')
+
+
+    
+
+    

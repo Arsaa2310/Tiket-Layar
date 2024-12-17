@@ -1,11 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
+class Film(models.Model):
+    id_film = models.AutoField(primary_key=True)
+    judul = models.CharField(max_length=100)
+    durasi = models.CharField(max_length=50)
+    genre = models.CharField(max_length=50)
+    sinopsis = models.TextField()
+    rating = models.CharField(max_length=25)
+    link_poster = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.judul
+
 class Bioskop(models.Model):
     id_bioskop = models.AutoField(primary_key=True)
     nm_bioskop = models.CharField(max_length=25)
     alamat = models.CharField(max_length=100)
     kota = models.IntegerField(null=True, blank=True)
+    id_film = models.ManyToManyField(Film)
 
     def __str__(self):
         return self.nm_bioskop
@@ -42,17 +55,6 @@ class Pelanggan(AbstractUser):
     def __str__(self):
         return self.nm_pelanggan
     
-# Model Film
-class Film(models.Model):
-    judul = models.CharField(max_length=100)
-    durasi = models.CharField(max_length=50)
-    genre = models.CharField(max_length=50)
-    sinopsis = models.TextField()
-    rating = models.CharField(max_length=25)
-    link_poster = models.CharField(max_length=500)
-
-    def __str__(self):
-        return self.judul
 
 class Tiket(models.Model):
     id_tiket = models.AutoField(primary_key=True)
@@ -63,7 +65,8 @@ class Tiket(models.Model):
     waktu_mulai = models.TimeField()
     waktu_selesai = models.TimeField()
     harga = models.DecimalField(max_digits=10, decimal_places=2)
-    status_tiket = models.IntegerField(null=True, blank=True)
+    status_tiket = models.IntegerField(null=True, default=False)
+    id_pelanggan = models.ForeignKey(Pelanggan, on_delete=models.CASCADE, null=True, blank=False)
 
     def __str__(self):
         return self.kode_tiket
